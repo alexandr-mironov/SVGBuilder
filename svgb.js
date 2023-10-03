@@ -1,4 +1,4 @@
-
+const NAMESPACE = 'http://www.w3.org/2000/svg';
 class AbstractBuilder {
   _createNode(type, namespace) {
     this._el = document.createElementNS(namespace, type);
@@ -16,7 +16,7 @@ class AbstractBuilder {
 
 class SVGBuilder extends AbstractBuilder {
   constructor(ns) {
-    ns = ns || 'http://www.w3.org/2000/svg';
+    ns = ns || NAMESPACE;
     super();
     this._createNode('svg', ns)
   }
@@ -41,7 +41,7 @@ class SVGBuilder extends AbstractBuilder {
 
 class PathBuilder extends AbstractBuilder {
   constructor(ns) {
-    ns = ns || 'http://www.w3.org/2000/svg';
+    ns = ns || NAMESPACE;
     super();
     this._createNode('path', ns);
     
