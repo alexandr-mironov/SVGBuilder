@@ -1,4 +1,5 @@
-class AbstractBuilder{
+
+class AbstractBuilder {
   _createNode(type, namespace) {
     this._el = document.createElementNS(namespace, type);
   }
@@ -16,25 +17,40 @@ class AbstractBuilder{
 class SVGBuilder extends AbstractBuilder {
   constructor(ns) {
     ns = ns || 'http://www.w3.org/2000/svg';
-    _createNode('svg', ns)
+    super();
+    this._createNode('svg', ns)
   }
   
   setWidth(width) {
-     return _setAttribute('width', width);
+     return this._setAttribute('width', width);
   }
   
   setHeight(height) {
-    return _setAttribute('height', height);
+    return this._setAttribute('height', height);
   }
   
-  render() {
-    return this._el;
+  setViewBox(xmin, ymin, xmax, ymax) {
+    return this._setAttribute('viewBox', `${xmin || 0} ${ymin || 0} ${xmax || 0} ${ymax || 0} `);
+  }
+  
+  addPath(path) {
+    this._el.appendChild(path);
+    return this;
   }
 }
 
 class PathBuilder extends AbstractBuilder {
   constructor(ns) {
     ns = ns || 'http://www.w3.org/2000/svg';
-    _createNode('path', ns);
+    super();
+    this._createNode('path', ns);
+    
+    // replace to methods
+    this._el.setAttribute('stroke', 'black');
+    this._el.setAttribute('fill', 'transparent');
+  }
+  
+  setD(data) {
+    return this._setAttribute('d', data);
   }
 }
