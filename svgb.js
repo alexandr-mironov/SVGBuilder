@@ -53,4 +53,27 @@ class PathBuilder extends AbstractBuilder {
   setD(data) {
     return this._setAttribute('d', data);
   }
+  
+  addMove(x, y) {
+    return this.appendD([
+      " ",
+      "M",
+      x,
+      y
+    ].join(" "))
+  }
+  
+  addLine(x, y) {
+    return this.appendD([
+      " ",
+      "L",
+      x,
+      y
+    ].join(" "))
+  }
+  
+  appendD(data) {
+    data = this._el.getAttribute('d') + data;
+    return this._setAttribute('d', data);
+  }
 }
